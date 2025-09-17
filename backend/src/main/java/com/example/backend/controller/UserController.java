@@ -1,8 +1,11 @@
 package com.example.backend.controller;
 
 
+import java.util.Map;
+
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/register")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials= "true")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -33,8 +37,8 @@ public class UserController {
                 .maxAge(24 * 60 * 60) // 1 dia
                 .build();
 
-        return ResponseEntity.ok()
-                .header("Set-Cookie", cookie.toString())
-                .body("Usuário cadastrado com sucesso");
+       return ResponseEntity.ok()
+    .header("Set-Cookie", cookie.toString())
+    .body(Map.of("message", "Usuário cadastrado com sucesso"));
     }
 }
